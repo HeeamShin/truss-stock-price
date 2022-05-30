@@ -21,8 +21,10 @@ stock_list = [
 ]
 
 df_list = [fdr.DataReader(code, '2022-03-31')['Close'] for name, code in stock_list]
-print(len(df_list))
-print(df_list)
+len(df_list)
+# print(df_list[0])
+# print(type(df_list))
+# print(df_list)
 
 # pd.concat()로 합치기
 
@@ -30,7 +32,7 @@ df = pd.concat(df_list, axis=1)
 df.columns = [name for name, code in stock_list] 
 df.head(10)
 
-
+print(df[['HLB']])
 
 # import sys
 
