@@ -63,7 +63,7 @@ for i in range(len(stock_list)):
   edited_lines = [] # 수정된 파일 내용이 임시로 저장될 리스트
   current_price_earning_ratio_list_string = "\t\t\t\tname: \"" + str(name_list[cnt]) + "\", data: " + str(tmp_stock_price_list) + ",\n"   # 현재 cnt에서 수정할 데이터
 
-  with open("../custom-highlight-copy.js") as f:
+  with open("./custom-highlight.js") as f:
     lines = f.readlines()
     for line in lines:
       # 조건에 따라 원하는 대로 line을 수정
@@ -72,7 +72,7 @@ for i in range(len(stock_list)):
       else:
         edited_lines.append(line)
 
-  with open("../custom-highlight-copy.js", 'w') as f:
+  with open("./custom-highlight.js", 'w') as f:
       f.writelines(edited_lines)
 
   cnt += 1
