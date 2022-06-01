@@ -21,11 +21,14 @@ stock_list = [
   ["KOSPI", "KS11"],
 ]
 
+# 출력 결과 저장을 위한 파일 open
+sys.stdout = open('stockprice.txt', 'w')
 
 # 전체 목록 출력
-# df_list = [fdr.DataReader(code, '2022-03-31')['Close'] for name, code in stock_list]
-# print(len(df_list))
-# print(df_list)
+df_list = [fdr.DataReader(code, '2022-03-31')['Close'] for name, code in stock_list]
+print(len(df_list)) # 종목 갯수 출력
+print(len(df_list['HLB'])) # 첫날부터 오늘까지의 날짜의 갯수 출력
+print(df_list)
 
 # # pd.concat()로 합치기
 
@@ -34,21 +37,17 @@ stock_list = [
 # df.head(10)
 
 # 개별 출력
-df = fdr.DataReader('028300','2022-03-31')['Close']
+# df = fdr.DataReader('028300','2022-03-31')['Close']
 # df2 = fdr.DataReader('SNDL','2022-03-31')
-
-# 출력 결과 저장을 위한 파일 open
-# sys.stdout = open('stockprice.txt', 'w')
-
 # print(type(df.Open))
-print(df['2022-03-31']) # 2022/03/31의 주식 가격
-print(df[0])            # 첫날의 주식 가격
-# print(df[0][0])       # Error
-print(len(df))          # 첫날부터 오늘까지의 날짜의 갯수 출력
-print(type(df))               # <class 'pandas.core.series.Series'>
-print(type(df['2022-03-31'])) # <class 'numpy.int64'>
+# print(df['2022-03-31']) # 2022/03/31의 주식 가격
+# print(df[0])            # 첫날의 주식 가격
+# # print(df[0][0])       # Error
+# print(len(df))          # 첫날부터 오늘까지의 날짜의 갯수 출력
+# print(type(df))               # <class 'pandas.core.series.Series'>
+# print(type(df['2022-03-31'])) # <class 'numpy.int64'>
 # print(df2.Close)
 # print(df2)
 
 # 출력 결과 저장을 위한 파일 close
-# sys.stdout.close()
+sys.stdout.close()
