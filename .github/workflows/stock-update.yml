@@ -22,7 +22,7 @@ jobs:
         pip install bs4
     - name: Crawling the stock price
       run: |
-        python ./price-crawling/finance-data-reader.py
+        python ./finance-data-reader.py
     - name: Push changes
       run: |
         git add *
