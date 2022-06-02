@@ -4,7 +4,8 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: "0 15 * * *"
+    - cron: "0 7 * * *"   # 한국 시간 16시, 국장 종가 조사용
+    - cron: "0 21 * * *"  # 한국 시간 6시, 미장 종가 조사용
   
 jobs:
   run:
