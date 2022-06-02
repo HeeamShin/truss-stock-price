@@ -6,7 +6,7 @@ The winner takes it all.
 
 - [ ] 등수 표시기
 - [ ] Commit 시간
-- [ ] 파일 정리
+- [x] 파일 정리
 
 ## How to Implement
 
