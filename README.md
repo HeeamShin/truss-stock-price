@@ -5,7 +5,7 @@ The winner takes it all.
 ## To Do
 
 - [ ] 등수 표시기
-- [ ] Commit 시간
+- [x] 미장&국장용 commit scheduler 추가
 - [x] 파일 정리
 
 ## How to Implement
