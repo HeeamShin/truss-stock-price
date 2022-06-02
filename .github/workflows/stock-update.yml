@@ -6,7 +6,6 @@ on:
   schedule:
     - cron: "0 15 * * *"
   
-
 jobs:
   run:
 
@@ -31,5 +30,5 @@ jobs:
         git add *
         git config --local user.email "ska900222@gmail.com"
         git config --local user.name "HeeamShin"
-        git commit -m "stock prices updated"
+        git commit -m "GitHub Actions: stock prices updated"
         git push
