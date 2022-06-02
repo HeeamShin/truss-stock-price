@@ -46,24 +46,27 @@ cnt = 0
 print(stock_list[0][1])
 
 for i in range(len(stock_list)):
-  # print(name_list[cnt])
   tmp_stock_price_list = [] # 현재 cnt에 해당하는 주식의 일자별 가격이 담길 임시 리스트
-  # saved_path = "../backdata/" + str(cnt) + ".txt" # 현재 cnt에 해당하는 주식의 일자별 가격을 저장할 파일의 위치
 
   df = fdr.DataReader(stock_list[cnt][1],'2022-03-31')['Close']
   # print(len(df))  # df 안의 데이터 갯수, 2022-03-31부터 오늘까지의 날짜의 갯수와 같음
   
   # tmp_stock_price_list에 현재 cnt에 해당하는 주식의 일자별 가격을 담음
   for i in range(len(df)):
-    tmp_stock_price_list.append(round((df[i] - df[0]) / df[0] * 100, 2))  # 수익률을 소수 셋째 자리에서 반올림 함
-
-  # print(tmp_stock_price_list)
-  # print(str(tmp_stock_price_list))
+    date = "Date.UTC(" + str(df.index[i].year) + ", " + str(df.index[i].month - 1) + ", " + str(df.index[i].day) + ")" # 날짜 정보 저장
+    price_earning_ratio = round((df[i] - df[0]) / df[0] * 100, 2) # 수익률을 소수 셋째 자리에서 반올림 함
+    tmp_stock_price_list.append([date, price_earning_ratio])
+  
+  tmp_stock_price_list_with_date = "" # 날짜 정보와 수익률을 문자열로 저장
+  
+  for d, p in tmp_stock_price_list:
+    delta = "[" + d + ", " + str(p) + "], "
+    tmp_stock_price_list_with_date += delta
 
   edited_lines = [] # 수정된 파일 내용이 임시로 저장될 리스트
-  current_price_earning_ratio_list_string = "\t\t\t\tname: \"" + str(name_list[cnt]) + "\", data: " + str(tmp_stock_price_list) + ",\n"   # 현재 cnt에서 수정할 데이터
+  current_price_earning_ratio_list_string = "\t\t\t\tname: \"" + str(name_list[cnt]) + "\", data: [" + tmp_stock_price_list_with_date + "],\n"   # 현재 cnt에서 수정할 데이터
 
-  with open("./custom-highlight.js") as f:
+  with open("./chart-drawer.js", 'rt', encoding='UTF8') as f:
     lines = f.readlines()
     for line in lines:
       # 조건에 따라 원하는 대로 line을 수정
@@ -72,40 +75,7 @@ for i in range(len(stock_list)):
       else:
         edited_lines.append(line)
 
-  with open("./custom-highlight.js", 'w') as f:
+  with open("./chart-drawer.js", 'w', encoding='UTF8') as f:
       f.writelines(edited_lines)
 
   cnt += 1
-
-
-
-# 출력 결과 저장을 위한 파일 open
-# sys.stdout = open('stockprice.txt', 'w')
-
-# 전체 목록 출력
-# df_list = [fdr.DataReader(code, '2022-03-31')['Close'] for name, code in stock_list]
-# print(len(df_list)) # 종목 갯수 출력
-# print(len(df_list['HLB'])) # 첫날부터 오늘까지의 날짜의 갯수 출력
-# print(df_list)
-
-# # pd.concat()로 합치기
-
-# df = pd.concat(df_list, axis=1)
-# df.columns = [name for name, code in stock_list] 
-# df.head(10)
-
-# 개별 출력
-# df = fdr.DataReader('028300','2022-03-31')['Close']
-# df2 = fdr.DataReader('SNDL','2022-03-31')
-# print(type(df.Open))
-# print(df['2022-03-31']) # 2022/03/31의 주식 가격
-# print(df[0])            # 첫날의 주식 가격
-# # print(df[0][0])       # Error
-# print(len(df))          # 첫날부터 오늘까지의 날짜의 갯수 출력
-# print(type(df))               # <class 'pandas.core.series.Series'>
-# print(type(df['2022-03-31'])) # <class 'numpy.int64'>
-# print(df2.Close)
-# print(df2)
-
-# 출력 결과 저장을 위한 파일 close
-# sys.stdout.close()
