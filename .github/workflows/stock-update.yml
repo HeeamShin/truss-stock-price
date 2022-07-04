@@ -1,35 +1,36 @@
-name: Crawling the stock price
+# 2022-07-04: This repository is archived
+# name: Crawling the stock price
 
-on:
-  push:
-    branches: [ main ]
-  schedule:
-    - cron: "0 7 * * *"
-    - cron: "0 21 * * *"
+# on:
+#   push:
+#     branches: [ main ]
+#   schedule:
+#     - cron: "0 7 * * *"
+#     - cron: "0 21 * * *"
   
-jobs:
-  run:
+# jobs:
+#   run:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up python 3.9
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -U finance-datareader
-        pip install bs4
-    - name: Crawling the stock price
-      run: |
-        python ./finance-data-reader.py
-    - name: Push changes
-      run: |
-        git add *
-        git config --local user.email "ska900222@gmail.com"
-        git config --local user.name "HeeamShin"
-        git commit -m "GitHub Actions: stock prices updated"
-        git push
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Set up python 3.9
+#       uses: actions/setup-python@v2
+#       with:
+#         python-version: 3.9
+#     - name: Install dependencies
+#       run: |
+#         python -m pip install --upgrade pip
+#         pip install -U finance-datareader
+#         pip install bs4
+#     - name: Crawling the stock price
+#       run: |
+#         python ./finance-data-reader.py
+#     - name: Push changes
+#       run: |
+#         git add *
+#         git config --local user.email "ska900222@gmail.com"
+#         git config --local user.name "HeeamShin"
+#         git commit -m "GitHub Actions: stock prices updated"
+#         git push
